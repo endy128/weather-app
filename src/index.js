@@ -55,12 +55,12 @@ form.addEventListener("submit", (e) => {
   getGeocoding().then((object) => {
     const { lat } = object;
     const { lon } = object;
-    getWeather(lat, lon).then((object) => {
-      const loc = object.data.name;
-      const { main } = object.data.weather[0];
-      const { temp } = object.data.main;
-      const maxTemp = object.data.main.temp_max;
-      const minTemp = object.data.main.temp_min;
+    getWeather(lat, lon).then((data) => {
+      const loc = data.data.name;
+      const { main } = data.data.weather[0];
+      const { temp } = data.data.main;
+      const maxTemp = data.data.main.temp_max;
+      const minTemp = data.data.main.temp_min;
       renderWeather(loc, main, temp, maxTemp, minTemp);
     });
   });
