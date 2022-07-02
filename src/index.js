@@ -4,7 +4,7 @@ const getGeocoding = async () => {
   const location = document.getElementById("location");
   const locValue = location.value.trim();
   const response = await fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${locValue}&limit=1&appid=${APIKEY}`,
+    `https://api.openweathermap.org/geo/1.0/direct?q=${locValue}&limit=1&appid=${APIKEY}`,
     { mode: "cors" },
   );
   const data = await response.json();
