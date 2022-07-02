@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <script defer src="main.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <form id="form" action="index.html" type="get">
+      <div class="input-control">
+        <div class="temp-switch">
+          <span class="title">°F / °C</span>
+          <label class="switch">
+            <input type="checkbox" name="isMetric" id="isMetric" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <label for="location">Location</label>
+          <input type="text" name="location" id="location">
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="weather">
+      <table>
+        <tr>
+          <td>Location:</td>
+          <td id="loc"></td>
+        </tr>
+        <tr>
+          <td>Weather:</td>
+          <td id="main"></td>
+        </tr>
+        <tr>
+          <td>Temp:</td>
+          <td id="temp"></td>
+        </tr>
+        <tr>
+          <td>Max Temp:</td>
+          <td id="maxTemp"></td>
+        </tr>
+        <tr>
+          <td>Min Temp:</td>
+          <td id="minTemp"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
