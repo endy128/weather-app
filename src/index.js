@@ -14,26 +14,54 @@ const getGeocoding = async () => {
   return { lat, lon };
 };
 
+const getUnits = () => {
+  const isChecked = document.getElementById("isMetric").checked;
+  return isChecked;
+};
+
 const getWeather = async (lat, lon) => {
-  console.log(lat, lon);
+  let units;
+  if (getUnits() === true) {
+    units = "metric";
+  } else {
+    units = "imperial";
+  }
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}`,
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=${units}`,
     { mode: "cors" },
   );
   const data = await response.json();
-  console.log(data);
+  return { data };
 };
 
-const renderWeather = () => {
+const renderWeather = (loc, main, temp, maxTemp, minTemp) => {
+  const locEl = document.getElementById("loc");
+  const mainEl = document.getElementById("main");
+  const tempEl = document.getElementById("temp");
+  const maxTempEl = document.getElementById("maxTemp");
+  const minTempEl = document.getElementById("minTemp");
 
+  locEl.textContent = loc;
+  mainEl.textContent = main;
+  tempEl.textContent = `${temp}°`;
+  maxTempEl.textContent = `${maxTemp}°`;
+  minTempEl.textContent = `${minTemp}°`;
 };
+
+const form = document.getElementById("form");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   getGeocoding().then((object) => {
-    console.log(object);
     const { lat } = object;
     const { lon } = object;
-    getWeather(lat, lon);
+    getWeather(lat, lon).then((object) => {
+      const loc = object.data.name;
+      const { main } = object.data.weather[0];
+      const { temp } = object.data.main;
+      const maxTemp = object.data.main.temp_max;
+      const minTemp = object.data.main.temp_min;
+      renderWeather(loc, main, temp, maxTemp, minTemp);
+    });
   });
 });
