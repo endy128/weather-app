@@ -10,9 +10,11 @@
 
 html,
 body {
-  height: 1vh;
+  height: 100%;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -24,7 +26,7 @@ body {
   width: 400px;
   background-color: var(--bg-shade);
   border-radius: 5px;
-  margin: 10px 10px auto auto;
+  margin: 10px 10px 48px auto;
   gap: 6px;
   padding: 12px;
   display: flex;
@@ -160,9 +162,8 @@ input:checked + .slider:before {
 }
 
 .current {
-  margin: 5vh auto auto auto;
+ align-self: center;
   width: 400px;
-  /* height: 400px; */
   padding: 24px;
 }
 
@@ -252,16 +253,12 @@ input:checked + .slider:before {
 }
 
 .footer {
-  position: absolute;
-  bottom: 10px;
-  left: 50vw;
-  transform: translate(-50%);
   text-decoration: none;
   font-size: 70%;
-
+  margin-top: auto;
+  align-self: center;
 }
 
 .footer a {
-  /* text-decoration: none; */
   color: inherit;
 }
