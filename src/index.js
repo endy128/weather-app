@@ -98,8 +98,23 @@ form.addEventListener('submit', (e) => {
     getOneCallWeather(lat, lon, name).then((data) => {
       console.log(lat, lon);
       renderWeather(data, name);
+      document.getElementById('location').value = '';
     });
   });
+});
+
+const input = document.getElementById('location');
+
+// Execute a function when the user presses a key on the keyboard
+input.addEventListener('keypress', (event) => {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === 'Enter') {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById('search').click();
+    document.getElementById('location').value = '';
+  }
 });
 
 // set default weather for when page first loads

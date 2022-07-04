@@ -164,7 +164,7 @@ input:checked + .slider:before {
 
 .current {
  align-self: center;
-  width: 400px;
+  /* width: 400px; */
   padding: 24px;
 }
 
