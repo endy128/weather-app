@@ -1,67 +1,109 @@
-const APIKEY = "3c7beccb5e8b340ec043b464fc73af2f";
+const APIKEY = '3c7beccb5e8b340ec043b464fc73af2f';
+const form = document.getElementById('form');
 
 const getGeocoding = async () => {
-  const location = document.getElementById("location");
+  const location = document.getElementById('location');
   const locValue = location.value.trim();
   const response = await fetch(
     `https://api.openweathermap.org/geo/1.0/direct?q=${locValue}&limit=1&appid=${APIKEY}`,
-    { mode: "cors" },
+    { mode: 'cors' },
   );
   const data = await response.json();
   const { lat } = data[0];
   const { lon } = data[0];
+  const { name } = data[0];
 
-  return { lat, lon };
+  return { lat, lon, name };
 };
 
 const getUnits = () => {
-  const isChecked = document.getElementById("isMetric").checked;
+  const isChecked = document.getElementById('isMetric').checked;
   return isChecked;
 };
 
-const getWeather = async (lat, lon) => {
+const getOneCallWeather = async (lat, lon) => {
   let units;
   if (getUnits() === true) {
-    units = "metric";
+    units = 'metric';
   } else {
-    units = "imperial";
+    units = 'imperial';
   }
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=${units}`,
-    { mode: "cors" },
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,&appid=${APIKEY}&units=${units}`,
+    { mode: 'cors' },
   );
   const data = await response.json();
   return { data };
 };
 
-const renderWeather = (loc, main, temp, maxTemp, minTemp) => {
-  const locEl = document.getElementById("loc");
-  const mainEl = document.getElementById("main");
-  const tempEl = document.getElementById("temp");
-  const maxTempEl = document.getElementById("maxTemp");
-  const minTempEl = document.getElementById("minTemp");
+const renderDay = (data, day) => {
+  let windSpeed;
+  if (getUnits() === true) {
+    windSpeed = 'kmph';
+  } else {
+    windSpeed = 'mph';
+  }
+  const descEl = document.querySelector(`#day${day} .day-desc`);
+  const iconEl = document.getElementById(`day${day}Icon`);
+  const tempEl = document.querySelector(`#day${day} .day-temp`);
+  const humEl = document.querySelector(`#day${day} .day-hum p`);
+  const windEl = document.querySelector(`#day${day} .day-wind p`);
+  const pressEl = document.querySelector(`#day${day} .day-press p`);
+  const fileName = data.data.daily[`${day}`].weather[0].icon;
 
-  locEl.textContent = loc;
-  mainEl.textContent = main;
-  tempEl.textContent = `${temp}°`;
-  maxTempEl.textContent = `${maxTemp}°`;
-  minTempEl.textContent = `${minTemp}°`;
+  descEl.textContent = data.data.daily[`${day}`].weather[0].description;
+  iconEl.src = `img/${fileName}.svg`;
+  tempEl.textContent = `${Math.round(data.data.daily[`${day}`].temp.day)}°`;
+  humEl.textContent = `${data.data.daily[`${day}`].humidity} %`;
+  windEl.textContent = `${data.data.daily[`${day}`].wind_speed} ${windSpeed}`;
+  pressEl.textContent = `${data.data.daily[`${day}`].pressure} hPa`;
 };
 
-const form = document.getElementById("form");
+const renderWeather = (data, name) => {
+  console.log(name);
+  console.log(data);
+  let windSpeed;
+  if (getUnits() === true) {
+    windSpeed = 'kmph';
+  } else {
+    windSpeed = 'mph';
+  }
+  const locEl = document.getElementById('loc');
+  const descEl = document.querySelector('.desc');
+  const iconEl = document.getElementById('currIcon');
+  const tempEl = document.querySelector('.temp');
+  const humEl = document.querySelector('.hum p');
+  const windEl = document.querySelector('.wind p');
+  const pressEl = document.querySelector('.press p');
 
-form.addEventListener("submit", (e) => {
+  locEl.textContent = name;
+  descEl.textContent = data.data.current.weather[0].description;
+  iconEl.src = `img/${data.data.current.weather[0].icon}.svg`;
+  tempEl.textContent = `${Math.round(data.data.current.temp)}°`;
+  humEl.textContent = `${data.data.current.humidity} %`;
+  windEl.textContent = `${data.data.current.wind_speed} ${windSpeed}`;
+  pressEl.textContent = `${data.data.current.pressure} hPa`;
+
+  for (let i = 0; i < 7; i++) {
+    renderDay(data, i);
+  }
+};
+
+form.addEventListener('submit', (e) => {
   e.preventDefault();
   getGeocoding().then((object) => {
+    const { name } = object;
     const { lat } = object;
     const { lon } = object;
-    getWeather(lat, lon).then((data) => {
-      const loc = data.data.name;
-      const { main } = data.data.weather[0];
-      const { temp } = data.data.main;
-      const maxTemp = data.data.main.temp_max;
-      const minTemp = data.data.main.temp_min;
-      renderWeather(loc, main, temp, maxTemp, minTemp);
+    getOneCallWeather(lat, lon, name).then((data) => {
+      console.log(lat, lon);
+      renderWeather(data, name);
     });
   });
+});
+
+// set default weather for when page first loads
+getOneCallWeather(51.5073219, -0.1276474, 'London').then((data) => {
+  // console.log(lat, lon);
+  renderWeather(data, 'London');
 });
