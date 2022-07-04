@@ -9,45 +9,204 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <form id="form" action="index.html" type="get">
-      <div class="input-control">
-        <div class="temp-switch">
-          <span class="title">°F / °C</span>
-          <label class="switch">
-            <input type="checkbox" name="isMetric" id="isMetric" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <label for="location">Location</label>
-          <input type="text" name="location" id="location">
+
+
+  <div class="search-box">
+    <div class="switch-container">
+      <span class="title">Metric</span>
+      <div class="temp-switch">
+        <label class="switch">
+          <input type="checkbox" name="isMetric" id="isMetric" checked>
+          <span class="slider round"></span>
+        </label>
       </div>
-      <button type="submit">Submit</button>
-    </form>
-    <div class="weather">
-      <table>
-        <tr>
-          <td>Location:</td>
-          <td id="loc"></td>
-        </tr>
-        <tr>
-          <td>Weather:</td>
-          <td id="main"></td>
-        </tr>
-        <tr>
-          <td>Temp:</td>
-          <td id="temp"></td>
-        </tr>
-        <tr>
-          <td>Max Temp:</td>
-          <td id="maxTemp"></td>
-        </tr>
-        <tr>
-          <td>Min Temp:</td>
-          <td id="minTemp"></td>
-        </tr>
-      </table>
     </div>
+    <form id="form" action="index.html" type="get">
+      <label for="location">
+        <input type="text" name="location" id="location" placeholder="Type a location...">
+      </label>
+      <div class="button">
+        <button type="submit"><img src="img/magnify.svg" alt="Search"></button>
+      </div>
+    </form>
+  </div>
+
+  <div class="current">
+    <div id="loc"></div>
+    <div class="desc"></div>
+    <div class="highlights">
+      <div class="icon"><img id="currIcon" src="" alt=""></div>
+      <div class="temp"></div>
+    </div>
+    <div class="lowlights">
+      <div class="hum">
+        <h3>Humidity</h3>
+        <p></p>
+      </div>
+      <div class="wind">
+        <h3>Wind Sp.</h3>
+        <p></p>
+      </div>
+      <div class="press">
+        <h3>Pressure</h3>
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="week">
+    <div class="day" id="day0">
+      <div class="day-desc"></div>
+      <div class="day-highlights">
+        <div class="day-icon"><img id="day0Icon" src="" alt=""></div>
+        <div class="day-temp"></div>
+      </div>
+      <div class="day-lowlights">
+        <div class="day-hum">
+          <h3>Hum</h3>
+          <p></p>
+        </div>
+        <div class="day-wind">
+          <h3>Wnd</h3>
+          <p></p>
+        </div>
+        <div class="day-press">
+          <h3>Prs</h3>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <div class="day" id="day1">
+      <div class="day-desc"></div>
+      <div class="day-highlights">
+        <div class="day-icon"><img id="day1Icon" src="" alt=""></div>
+        <div class="day-temp"></div>
+      </div>
+      <div class="day-lowlights">
+        <div class="day-hum">
+          <h3>Hum</h3>
+          <p></p>
+        </div>
+        <div class="day-wind">
+          <h3>Wnd</h3>
+          <p></p>
+        </div>
+        <div class="day-press">
+          <h3>Prs</h3>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <div class="day" id="day2">
+      <div class="day-desc"></div>
+      <div class="day-highlights">
+        <div class="day-icon"><img id="day2Icon" src="" alt=""></div>
+        <div class="day-temp"></div>
+      </div>
+      <div class="day-lowlights">
+        <div class="day-hum">
+          <h3>Hum</h3>
+          <p></p>
+        </div>
+        <div class="day-wind">
+          <h3>Wnd</h3>
+          <p></p>
+        </div>
+        <div class="day-press">
+          <h3>Prs</h3>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <div class="day" id="day3">
+      <div class="day-desc"></div>
+      <div class="day-highlights">
+        <div class="day-icon"><img id="day3Icon" src="" alt=""></div>
+        <div class="day-temp"></div>
+      </div>
+      <div class="day-lowlights">
+        <div class="day-hum">
+          <h3>Hum</h3>
+          <p></p>
+        </div>
+        <div class="day-wind">
+          <h3>Wnd</h3>
+          <p></p>
+        </div>
+        <div class="day-press">
+          <h3>Prs</h3>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <div class="day" id="day4">
+      <div class="day-desc"></div>
+      <div class="day-highlights">
+        <div class="day-icon"><img id="day4Icon" src="" alt=""></div>
+        <div class="day-temp"></div>
+      </div>
+      <div class="day-lowlights">
+        <div class="day-hum">
+          <h3>Hum</h3>
+          <p></p>
+        </div>
+        <div class="day-wind">
+          <h3>Wnd</h3>
+          <p></p>
+        </div>
+        <div class="day-press">
+          <h3>Prs</h3>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <div class="day" id="day5">
+      <div class="day-desc"></div>
+      <div class="day-highlights">
+        <div class="day-icon"><img id="day5Icon" src="" alt=""></div>
+        <div class="day-temp"></div>
+      </div>
+      <div class="day-lowlights">
+        <div class="day-hum">
+          <h3>Hum</h3>
+          <p></p>
+        </div>
+        <div class="day-wind">
+          <h3>Wnd</h3>
+          <p></p>
+        </div>
+        <div class="day-press">
+          <h3>Prs</h3>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <div class="day" id="day6">
+      <div class="day-desc"></div>
+      <div class="day-highlights">
+        <div class="day-icon"><img id="day6Icon" src="" alt=""></div>
+        <div class="day-temp"></div>
+      </div>
+      <div class="day-lowlights">
+        <div class="day-hum">
+          <h3>Hum</h3>
+          <p></p>
+        </div>
+        <div class="day-wind">
+          <h3>Wnd</h3>
+          <p></p>
+        </div>
+        <div class="day-press">
+          <h3>Prs</h3>
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="footer">
+    <p>Designed by <a href="https://github.com/endy128">endy128</a> in 2022, icons courtesy of <a href="https://www.iconfinder.com/ambo_dalle">Ladalle CS</a> under <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons License</a></p>
   </div>
 </body>
 </html>
