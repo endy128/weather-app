@@ -38,6 +38,7 @@ body {
   border-bottom-left-radius: 25px;
   border-top-left-radius: 25px;
   display: block;
+  color: inherit;
   font-size: 24px;
   padding: 4px 8px;
   width: 100%;
@@ -221,9 +222,6 @@ input:checked + .slider:before {
   padding-bottom: 12px;
 }
 
-.lowlights p {
-  /* font-size: 0%; */
-}
 
 .day-desc {
   font-size: 100%;
