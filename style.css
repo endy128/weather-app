@@ -8,6 +8,9 @@
   box-sizing: border-box;
 }
 
+
+
+
 html,
 body {
   height: 100%;
@@ -215,6 +218,7 @@ input:checked + .slider:before {
   display: flex;
   /* font-size: 2em; */
   justify-content: space-around;
+  /* flex-wrap: wrap; */
 }
 
 .lowlights h3 {
@@ -259,4 +263,21 @@ input:checked + .slider:before {
 
 .footer a {
   color: inherit;
+}
+
+
+@media screen and (max-width: 500px) {
+  .week {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) );
+
+    justify-items: center;
+  }
+
+  .current {
+    display: grid;
+    
+  }
+
+
 }
