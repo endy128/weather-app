@@ -39,7 +39,7 @@ const getOneCallWeather = async (lat, lon) => {
 const renderDay = (data, day) => {
   let windSpeed;
   if (getUnits() === true) {
-    windSpeed = 'kmph';
+    windSpeed = 'm/s';
   } else {
     windSpeed = 'mph';
   }
@@ -64,7 +64,7 @@ const renderWeather = (data, name) => {
   console.log(data);
   let windSpeed;
   if (getUnits() === true) {
-    windSpeed = 'kmph';
+    windSpeed = 'm/s';
   } else {
     windSpeed = 'mph';
   }
