@@ -269,15 +269,21 @@ input:checked + .slider:before {
 @media screen and (max-width: 500px) {
   .week {
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) );
+    grid-template-columns: repeat( auto-fit, minmax(150px, 1fr) );
 
     justify-items: center;
   }
 
-  .current {
-    display: grid;
-    
+  .day {
+    width: 100%;
   }
 
+  .current {
+    display: grid;
+  }
+
+  .search-box {
+    width: 100%;
+  }
 
 }
