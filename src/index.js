@@ -21,6 +21,12 @@ const getUnits = () => {
   return isChecked;
 };
 
+const getWeekDay = (utc) => {
+  const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const date = new Date(utc * 1000);
+  return weekday[date.getDay()];
+};
+
 const getOneCallWeather = async (lat, lon) => {
   let units;
   if (getUnits() === true) {
@@ -50,6 +56,8 @@ const renderDay = (data, day) => {
   const windEl = document.querySelector(`#day${day} .day-wind p`);
   const pressEl = document.querySelector(`#day${day} .day-press p`);
   const fileName = data.data.daily[`${day}`].weather[0].icon;
+  const weekdayEl = document.querySelector(`#day${day} .weekday`);
+  const weekday = getWeekDay(`${data.data.daily[`${day}`].dt}`);
 
   descEl.textContent = data.data.daily[`${day}`].weather[0].description;
   iconEl.src = `img/${fileName}.svg`;
@@ -57,6 +65,7 @@ const renderDay = (data, day) => {
   humEl.textContent = `${data.data.daily[`${day}`].humidity} %`;
   windEl.textContent = `${data.data.daily[`${day}`].wind_speed} ${windSpeed}`;
   pressEl.textContent = `${data.data.daily[`${day}`].pressure} hPa`;
+  weekdayEl.textContent = weekday;
 };
 
 const renderWeather = (data, name) => {
